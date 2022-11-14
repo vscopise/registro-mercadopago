@@ -1,4 +1,5 @@
 <?php
+
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -7,7 +8,7 @@ use Twig\Loader\FilesystemLoader;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-if ('127.0.0.1'==$_SERVER['SERVER_ADDR']) {
+if ('127.0.0.1' == $_SERVER['SERVER_ADDR']) {
     Dotenv\Dotenv::createImmutable(__DIR__)->load();
 } else {
     Dotenv\Dotenv::createImmutable(__DIR__ . '/../')->load();
@@ -32,6 +33,7 @@ $app->post('/process_payment', function (Request $request, Response $response) {
         $parsed_request = $request->withParsedBody($contents);
         $parsed_body = $parsed_request->getParsedBody();
 
+        //Realizo el primer cobro
         $payment = new MercadoPago\Payment();
         $payment->transaction_amount = $parsed_body['transaction_amount'];
         $payment->token = $parsed_body['token'];
@@ -98,9 +100,9 @@ $app->post('/append_data', function (Request $request, Response $response) {
         $valueRange->setValues(["values" => $values]);
         $conf = ["valueInputOption" => "USER_ENTERED"];
         $result = $service->spreadsheets_values->append(
-            $spreadsheetId, 
-            $sheet, 
-            $valueRange, 
+            $spreadsheetId,
+            $sheet,
+            $valueRange,
             $conf
         );
 
@@ -121,7 +123,6 @@ $app->post('/append_data', function (Request $request, Response $response) {
         );
 
         return $result;
-
     } catch (Exception $exception) {
         $response_body = json_encode($response_fields);
         $response->getBody()->write($response_body);
@@ -141,6 +142,19 @@ function validate_payment_result($payment)
         }
 
         throw new Exception($error_message);
+    } else {
+        if ('approved' === $payment->status) {
+            //Crear un customer y asociarle la tarjeta utilizada
+            $customer = new MercadoPago\Customer();
+            $customer->email = $payment->payer->email;
+            $customer->save();
+            $customer_id = $customer->id;
+    
+            $card = new MercadoPago\Card();
+            $card->token = $payment->token;
+            $card->customer_id = $customer_id;
+            $card->save();
+        }
     }
 }
 
