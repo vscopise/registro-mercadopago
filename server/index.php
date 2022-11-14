@@ -37,6 +37,7 @@ $app->post('/process_payment', function (Request $request, Response $response) {
         $payment = new MercadoPago\Payment();
         $payment->transaction_amount = $parsed_body['transaction_amount'];
         $payment->token = $parsed_body['token'];
+        $payment->description = 'Primer cobro';
         $payment->installments = $parsed_body['installments'];
         $payment->payment_method_id = $parsed_body['payment_method_id'];
         $payment->issuer_id = $parsed_body['issuer_id'];
@@ -48,15 +49,27 @@ $app->post('/process_payment', function (Request $request, Response $response) {
             "number" => $parsed_body['payer']['identification']['number']
         );
         $payment->payer = $payer;
-
         $payment->save();
 
-        validate_payment_result($payment);
+        if ('approved' === $payment->status) {
+            $customer = new MercadoPago\Customer();
+            //$payer = $payment->payer;
+            $customer->email = $payer->email;
+            $customer->save();
+            $customer_id = $customer->id;
+    
+            $card = new MercadoPago\Card();
+            $card->token = $payment->token;
+            $card->customer_id = $customer_id;
+            $card->save();
+        }
+
+        //validate_payment_result($payment);
 
         $response_fields = array(
-            'id' => $payment->id,
             'status' => $payment->status,
-            'detail' => $payment->status_detail
+            'status_detail' => $payment->status_detail,
+            'id' => $payment->id,
         );
 
         $response_body = json_encode($response_fields);
@@ -146,6 +159,7 @@ function validate_payment_result($payment)
         if ('approved' === $payment->status) {
             //Crear un customer y asociarle la tarjeta utilizada
             $customer = new MercadoPago\Customer();
+            $payer = $payment->payer;
             $customer->email = $payment->payer->email;
             $customer->save();
             $customer_id = $customer->id;
