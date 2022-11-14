@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+</head>
+
+<body>
+    <!-- Form Checkout -->
+    <form class="container px-3 pt-md-5 mx-auto cart needs-validation container_checkout" novalidate>
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 offset-sm-1 offset-md-2 offset-lg-3 offset-xl-4">
+            <h3 class="text-center">Datos del suscriptor</h3>
+            <input type="hidden" id="mercado-pago-public-key" value="{{ public_key }}">
+            <div class="mb-3">
+                <input name="name" id="name" class="form-control form-control-lg" type="text" placeholder="Nombre"
+                    required>
+            </div>
+            <div class="mb-3">
+                <input name="docNumber" id="docNumber" class="form-control form-control-lg" type="text"
+                    placeholder="Cédula" required>
+            </div>
+            <div class="mb-3">
+                <input name="phone" id="phone" class="form-control form-control-lg" type="text" placeholder="Teléfono"
+                    required>
+            </div>
+            <h3 class="text-center">Monto del aporte</h3>
+            <div class="input-group mb-4">
+                <span class="input-group-text form-control-lg">$</span>
+                <input name="amount" id="amount" class="form-control form-control-lg" type="text" required>
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" id="checkout-btn" class="btn btn-primary btn-lg">Pagar</button>
+            </div>
+        </div>
+    </form>
+    <!-- Payment -->
+    <div class="container px-3 pt-md-5 mx-auto container_payment">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 offset-sm-1 offset-md-2 offset-lg-3 offset-xl-4">
+            <h4 class="text-center mb-3">Realizar el cobro:</h4>
+            <p class="lh-base">
+                Nombre: <span id="name_text" class="fw-bold">name</span>
+            </p>
+            <p class="lh-base">
+                Cédula: <span id="docNumber_text" class="fw-bold"></span>
+            </p>
+            <p class="lh-base">
+                Teléfono: <span id="phone_text" class="fw-bold"></span>
+            </p>
+            <p class="lead">
+                Monto: <span id="amount_text" class="fw-bold"></span>
+            </p>
+        </div>
+        <div
+            class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 offset-sm-1 offset-md-2 offset-lg-3 offset-xl-4 brick-container">
+            <div id="cardPaymentBrick_container"></div>
+        </div>
+    </div>
+    <!-- Result -->
+    <div class="container px-3 pt-md-5 mx-auto container_result">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 offset-sm-1 offset-md-2 offset-lg-3 offset-xl-4">
+            <p><b>ID: </b><span id="payment-id"></span></p>
+            <p><b>Status: </b><span id="payment-status"></span></p>
+            <p><b>Detail: </b><span id="payment-detail"></span></p>
+            <p><span id="google-sheet-result"></span></p>
+            <div class="d-grid gap-2">
+                <button type="button" class="btn btn-primary" onclick="setTimeout(function(){var ww = window.open(window.location, '_self'); ww.close(); }, 1000);">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script type="text/javascript" src="js/index.js" defer></script>
+</body>
+
+</html>

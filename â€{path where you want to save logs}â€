@@ -1,0 +1,109 @@
+[3832] Log opened at 2022-11-12 14:41:27.752339
+[3832] [Step Debug] INFO: Connecting to configured address/port: localhost:9003.
+[3832] [Step Debug] INFO: Connected to debugging client: localhost:9003 (through xdebug.client_host/xdebug.client_port). :-)
+[3832] [Step Debug] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///C:/composer/composer.phar" language="PHP" xdebug:language_version="8.1.12" protocol_version="1.0" appid="3832" idekey="VSCODE"><engine version="3.1.6"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2022 by Derick Rethans]]></copyright></init>
+
+[3832] [Step Debug] <- feature_set -i 1 -n resolved_breakpoints -v 1
+[3832] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="resolved_breakpoints" success="1"></response>
+
+[3832] [Step Debug] <- feature_set -i 2 -n notify_ok -v 1
+[3832] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="notify_ok" success="1"></response>
+
+[3832] [Step Debug] <- feature_set -i 3 -n extended_properties -v 1
+[3832] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="extended_properties" success="1"></response>
+
+[3832] [Step Debug] <- feature_get -i 4 -n breakpoint_include_return_value
+[3832] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_get" transaction_id="4" feature_name="breakpoint_include_return_value" supported="0"><![CDATA[0]]></response>
+
+[3832] [Step Debug] <- feature_set -i 5 -n max_children -v 100
+[3832] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="max_children" success="1"></response>
+
+[3832] [Step Debug] <- breakpoint_set -i 6 -t line -f file:///c:/laragon/www/mercadopago/server/index.php -n 19
+[3832] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="6" id="38320001" resolved="unresolved"></response>
+
+[3832] [Step Debug] <- run -i 7
+[3832] [Step Debug] -> <notify xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" name="error"><xdebug:message filename="phar://C:/composer/composer.phar/vendor/composer/xdebug-handler/src/XdebugHandler.php" lineno="392" type="Warning"><![CDATA[syntax error, unexpected end of file, expecting TC_DOLLAR_CURLY or TC_QUOTED_STRING or '"' in Unknown on line 1971
+]]></xdebug:message></notify>
+
+[3832] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="7" status="stopping" reason="ok"></response>
+
+[3832] [Step Debug] <- stop -i 8
+[3832] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stop" transaction_id="8" status="stopped" reason="ok"></response>
+
+[3832] Log closed at 2022-11-12 14:41:37.070183
+
+[11152] Log opened at 2022-11-12 18:22:46.472850
+[11152] [Step Debug] INFO: Connecting to configured address/port: localhost:9003.
+[11152] [Step Debug] INFO: Connected to debugging client: localhost:9003 (through xdebug.client_host/xdebug.client_port). :-)
+[11152] [Step Debug] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///C:/composer/composer.phar" language="PHP" xdebug:language_version="8.1.12" protocol_version="1.0" appid="11152" idekey="VSCODE"><engine version="3.1.6"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2022 by Derick Rethans]]></copyright></init>
+
+[11152] [Step Debug] <- feature_set -i 1 -n resolved_breakpoints -v 1
+[11152] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="resolved_breakpoints" success="1"></response>
+
+[11152] [Step Debug] <- feature_set -i 2 -n notify_ok -v 1
+[11152] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="notify_ok" success="1"></response>
+
+[11152] [Step Debug] <- feature_set -i 3 -n extended_properties -v 1
+[11152] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="extended_properties" success="1"></response>
+
+[11152] [Step Debug] <- feature_get -i 4 -n breakpoint_include_return_value
+[11152] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_get" transaction_id="4" feature_name="breakpoint_include_return_value" supported="0"><![CDATA[0]]></response>
+
+[11152] [Step Debug] <- feature_set -i 5 -n max_children -v 100
+[11152] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="max_children" success="1"></response>
+
+[11152] [Step Debug] <- breakpoint_set -i 6 -t line -f file:///c:/laragon/www/mercadopago/server/index.php -n 64
+[11152] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="6" id="111520001" resolved="unresolved"></response>
+
+[11152] [Step Debug] <- run -i 7
+[11152] [Step Debug] -> <notify xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" name="error"><xdebug:message filename="phar://C:/composer/composer.phar/vendor/composer/xdebug-handler/src/XdebugHandler.php" lineno="392" type="Warning"><![CDATA[syntax error, unexpected end of file, expecting TC_DOLLAR_CURLY or TC_QUOTED_STRING or '"' in Unknown on line 1971
+]]></xdebug:message></notify>
+
+[11152] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="7" status="stopping" reason="ok"></response>
+
+[11152] [Step Debug] <- stop -i 8
+[11152] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stop" transaction_id="8" status="stopped" reason="ok"></response>
+
+[11152] Log closed at 2022-11-12 18:23:00.428558
+
+[6152] Log opened at 2022-11-13 20:50:02.784896
+[6152] [Step Debug] INFO: Connecting to configured address/port: localhost:9003.
+[6152] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[6152] Log closed at 2022-11-13 20:50:10.787838
+
+[17624] Log opened at 2022-11-13 20:52:12.048364
+[17624] [Step Debug] INFO: Connecting to configured address/port: localhost:9003.
+[17624] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[17624] Log closed at 2022-11-13 20:54:52.749231
+
+[18520] Log opened at 2022-11-14 01:49:37.432815
+[18520] [Step Debug] INFO: Connecting to configured address/port: localhost:9003.
+[18520] [Step Debug] INFO: Connected to debugging client: localhost:9003 (through xdebug.client_host/xdebug.client_port). :-)
+[18520] [Step Debug] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///C:/composer/composer.phar" language="PHP" xdebug:language_version="8.1.12" protocol_version="1.0" appid="18520" idekey="VSCODE"><engine version="3.1.6"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2022 by Derick Rethans]]></copyright></init>
+
+[18520] [Step Debug] <- feature_set -i 1 -n resolved_breakpoints -v 1
+[18520] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="resolved_breakpoints" success="1"></response>
+
+[18520] [Step Debug] <- feature_set -i 2 -n notify_ok -v 1
+[18520] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="notify_ok" success="1"></response>
+
+[18520] [Step Debug] <- feature_set -i 3 -n extended_properties -v 1
+[18520] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="extended_properties" success="1"></response>
+
+[18520] [Step Debug] <- feature_get -i 4 -n breakpoint_include_return_value
+[18520] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_get" transaction_id="4" feature_name="breakpoint_include_return_value" supported="0"><![CDATA[0]]></response>
+
+[18520] [Step Debug] <- feature_set -i 5 -n max_children -v 100
+[18520] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="max_children" success="1"></response>
+
+[18520] [Step Debug] <- run -i 6
+[18520] [Step Debug] -> <notify xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" name="error"><xdebug:message filename="phar://C:/composer/composer.phar/vendor/composer/xdebug-handler/src/XdebugHandler.php" lineno="392" type="Warning"><![CDATA[syntax error, unexpected end of file, expecting TC_DOLLAR_CURLY or TC_QUOTED_STRING or '"' in Unknown on line 1971
+]]></xdebug:message></notify>
+
+[18520] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="6" status="stopping" reason="ok"></response>
+
+[18520] [Step Debug] <- stop -i 7
+[18520] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stop" transaction_id="7" status="stopped" reason="ok"></response>
+
+[18520] Log closed at 2022-11-14 01:49:46.448723
+
