@@ -1,0 +1,3 @@
+RewriteEngine on
+RewriteRule ^$ server/ [L]
+RewriteRule (.*) server/$1 [L]
