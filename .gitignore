@@ -1,3 +1,2 @@
 vendor
-.env
-/server/.env
+/server/env
