@@ -40,21 +40,24 @@ $app->post('/process_payment', function (Request $request, Response $response) {
         $payment->description = 'Primer cobro';
         $payment->installments = (int)$parsed_body['installments'];
         $payment->payment_method_id = $parsed_body['payment_method_id'];
-        $payment->issuer_id = (int)$parsed_body['issuer_id'];
+        //$payment->issuer_id = (int)$parsed_body['issuer_id'];
+        $payment->payer = array(
+            'email' => $parsed_body['payer']['email']
+        );
 
-        $payer = new MercadoPago\Payer();
+        /* $payer = new MercadoPago\Payer();
         $payer->email = $parsed_body['payer']['email'];
         $payer->identification = array(
             "type" => $parsed_body['payer']['identification']['type'],
             "number" => $parsed_body['payer']['identification']['number']
         );
-        $payment->payer = $payer;
+        $payment->payer = $payer; */
         $payment->save();
 
         if ('approved' === $payment->status) {
             $customer = new MercadoPago\Customer();
             //$payer = $payment->payer;
-            $customer->email = $payer->email;
+            $customer->email = $parsed_body['payer']['email'];
             $customer->save();
             $customer_id = $customer->id;
 
