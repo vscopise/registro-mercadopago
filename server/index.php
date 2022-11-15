@@ -35,12 +35,12 @@ $app->post('/process_payment', function (Request $request, Response $response) {
 
         //Realizo el primer cobro
         $payment = new MercadoPago\Payment();
-        $payment->transaction_amount = $parsed_body['transaction_amount'];
+        $payment->transaction_amount = (float)$parsed_body['transaction_amount'];
         $payment->token = $parsed_body['token'];
         $payment->description = 'Primer cobro';
-        $payment->installments = $parsed_body['installments'];
+        $payment->installments = (int)$parsed_body['installments'];
         $payment->payment_method_id = $parsed_body['payment_method_id'];
-        $payment->issuer_id = $parsed_body['issuer_id'];
+        $payment->issuer_id = (int)$parsed_body['issuer_id'];
 
         $payer = new MercadoPago\Payer();
         $payer->email = $parsed_body['payer']['email'];
@@ -57,7 +57,7 @@ $app->post('/process_payment', function (Request $request, Response $response) {
             $customer->email = $payer->email;
             $customer->save();
             $customer_id = $customer->id;
-    
+
             $card = new MercadoPago\Card();
             $card->token = $payment->token;
             $card->customer_id = $customer_id;
@@ -163,7 +163,7 @@ function validate_payment_result($payment)
             $customer->email = $payment->payer->email;
             $customer->save();
             $customer_id = $customer->id;
-    
+
             $card = new MercadoPago\Card();
             $card->token = $payment->token;
             $card->customer_id = $customer_id;
