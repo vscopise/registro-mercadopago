@@ -9,9 +9,9 @@ use Twig\Loader\FilesystemLoader;
 require __DIR__ . '/../vendor/autoload.php';
 
 if ('127.0.0.1' == $_SERVER['SERVER_ADDR']) {
-    Dotenv\Dotenv::createImmutable(__DIR__ . '/env/dev/')->load();
+    Dotenv\Dotenv::createImmutable(__DIR__ . '/../env/dev/')->load();
 } else {
-    Dotenv\Dotenv::createImmutable(__DIR__ . '/env/prod/')->load();
+    Dotenv\Dotenv::createImmutable(__DIR__ . '/../env/prod/')->load();
 }
 
 $app = AppFactory::create();
