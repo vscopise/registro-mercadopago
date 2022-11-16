@@ -37,37 +37,58 @@ $app->post('/process_payment', function (Request $request, Response $response) {
         $payment = new MercadoPago\Payment();
         $payment->transaction_amount = (float)$parsed_body['transaction_amount'];
         $payment->token = $parsed_body['token'];
-        $payment->description = 'Primer cobro';
+        $payment->description = 'Registro en Mercadopago';
         $payment->installments = (int)$parsed_body['installments'];
         $payment->payment_method_id = $parsed_body['payment_method_id'];
-        //$payment->issuer_id = (int)$parsed_body['issuer_id'];
         $payment->payer = array(
             'email' => $parsed_body['payer']['email']
         );
 
-        /* $payer = new MercadoPago\Payer();
-        $payer->email = $parsed_body['payer']['email'];
-        $payer->identification = array(
-            "type" => $parsed_body['payer']['identification']['type'],
-            "number" => $parsed_body['payer']['identification']['number']
-        );
-        $payment->payer = $payer; */
+        $customer_id = search_customer($parsed_body["payer"]["email"]);
+
         $payment->save();
 
         if ('approved' === $payment->status) {
-            $customer = new MercadoPago\Customer();
-            //$payer = $payment->payer;
-            $customer->email = $parsed_body['payer']['email'];
-            $customer->save();
-            $customer_id = $customer->id;
 
+             //Me fijo si existe el customer
+            /*$customer = new MercadoPago\Customer();
+            $filters = array(
+                "email" => $parsed_body["payer"]["email"]
+            );
+            $customers = MercadoPago\Customer::search($filters);
+
+            if (0 == $customers->total) {
+                //Si no existe creo un nuevo customer
+                $customer = new MercadoPago\Customer();
+                $customer->email = $parsed_body['payer']['email'];
+                $customer->save();
+                $customer_id = $customer->id;
+            } else {
+                $customer_id = $customers[0]->id;
+                /* //elimino las tarjetas guardadas
+                $customer = MercadoPago\Customer::find_by_id($customer_id);
+                $cards = $customer->cards();
+                foreach ($cards as $card) {
+
+                } 
+            } */
+
+            //$customer_id = search_customer($parsed_body["payer"]["email"]);
+
+            if (!$customer_id) {
+                $customer = new MercadoPago\Customer();
+                //$payer = $payment->payer;
+                $customer->email = $parsed_body['payer']['email'];
+                $customer->save();
+                $customer_id = $customer->id;
+            }
+
+            //Guardo la nueva tarjeta
             $card = new MercadoPago\Card();
             $card->token = $payment->token;
             $card->customer_id = $customer_id;
             $card->save();
         }
-
-        //validate_payment_result($payment);
 
         $response_fields = array(
             'status' => $payment->status,
@@ -147,33 +168,20 @@ $app->post('/append_data', function (Request $request, Response $response) {
     }
 });
 
-function validate_payment_result($payment)
+function search_customer($email)
 {
-    if ($payment->id === null) {
-        $error_message = 'Unknown error cause';
-
-        if ($payment->error !== null) {
-            $sdk_error_message = $payment->error->message;
-            $error_message = $sdk_error_message !== null ? $sdk_error_message : $error_message;
-        }
-
-        throw new Exception($error_message);
+    $customer = new MercadoPago\Customer();
+    $filters = array(
+        "email" => $email
+    );
+    $customers = MercadoPago\Customer::search($filters);
+    if (0 == $customers->total) {
+        return false;
     } else {
-        if ('approved' === $payment->status) {
-            //Crear un customer y asociarle la tarjeta utilizada
-            $customer = new MercadoPago\Customer();
-            $payer = $payment->payer;
-            $customer->email = $payment->payer->email;
-            $customer->save();
-            $customer_id = $customer->id;
-
-            $card = new MercadoPago\Card();
-            $card->token = $payment->token;
-            $card->customer_id = $customer_id;
-            $card->save();
-        }
+        return $customers[0]->id;
     }
 }
+
 
 $app->get('/{filetype}/{filename}', function (Request $request, Response $response, $args) {
     switch ($args['filetype']) {
